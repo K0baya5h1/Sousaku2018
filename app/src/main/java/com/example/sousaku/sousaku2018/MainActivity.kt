@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() ,SensorEventListener{
             textView.text="${q.toString()}"
             phi=Math.atan(q.toDouble())
             textView2.text=(phi.toString())
-            //地磁気やってみた
+            //地磁気やってみたった
         }
 
     }
