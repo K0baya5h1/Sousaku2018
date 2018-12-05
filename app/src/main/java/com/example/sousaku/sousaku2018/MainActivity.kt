@@ -6,6 +6,7 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,31 +32,29 @@ class MainActivity : AppCompatActivity() ,SensorEventListener,LocationListener{
 
 
     override fun onSensorChanged(event: SensorEvent?) {
-        var def:Double=0.0
-        var phi:Double
+        /*var phi:Double
         var q:Double=0.0
-        if(event==null) return
-        if(event.sensor.type==Sensor.TYPE_MAGNETIC_FIELD){
-                button.setOnClickListener{
-                def= event.values[1].toDouble()
 
-            }
-            q=event.values[1].toDouble()-def
+            q=event.values[1].toDouble()
             textView.text="${q.toString()}"
             phi=Math.atan(q.toDouble())
             textView2.text=(phi.toString())
             //地磁気やってみたった
-            val GeomagneticField
-        }
+*/
+        if(event==null) return
+        textView.text=("角度:"+event.values[0].toInt().toString())
+        textView2.text=("ピッチ:"+event.values[1].toInt().toString())
+        textView3.text=("ロール:"+event.values[2].toInt().toString())
+
+
 
     }
 
     override fun onResume() {
         super.onResume()
         val sensorManager=getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        val accSensor=sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
-        sensorManager.registerListener(this,accSensor,SensorManager.SENSOR_DELAY_NORMAL)
-
+        val accSensor=sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION)
+        sensorManager.registerListener(this,accSensor,SensorManager.SENSOR_DELAY_GAME)
     }
 
     override fun onPause() {
