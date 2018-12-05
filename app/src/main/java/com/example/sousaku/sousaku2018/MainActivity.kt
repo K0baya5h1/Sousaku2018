@@ -1,17 +1,29 @@
 package com.example.sousaku.sousaku2018
 
 import android.content.Context
+import android.hardware.*
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.hardware.SensorManager
-import android.hardware.SensorEvent
-import android.hardware.Sensor
-import android.hardware.SensorEventListener
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() ,SensorEventListener{
+class MainActivity : AppCompatActivity() ,SensorEventListener,LocationListener{
+    override fun onLocationChanged(location: Location?) {
+    }
+
+    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+    }
+
+    override fun onProviderEnabled(provider: String?) {
+    }
+
+    override fun onProviderDisabled(provider: String?) {
+    }
+
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
 
     }
@@ -33,6 +45,7 @@ class MainActivity : AppCompatActivity() ,SensorEventListener{
             phi=Math.atan(q.toDouble())
             textView2.text=(phi.toString())
             //地磁気やってみたった
+            val GeomagneticField
         }
 
     }
@@ -42,6 +55,7 @@ class MainActivity : AppCompatActivity() ,SensorEventListener{
         val sensorManager=getSystemService(Context.SENSOR_SERVICE) as SensorManager
         val accSensor=sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
         sensorManager.registerListener(this,accSensor,SensorManager.SENSOR_DELAY_NORMAL)
+
     }
 
     override fun onPause() {
